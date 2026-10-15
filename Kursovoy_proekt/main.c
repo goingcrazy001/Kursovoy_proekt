@@ -2,6 +2,9 @@
 #include <locale.h>
 #include <math.h>
 
+main() {
+	F()
+}
 double Q(double X) {
 	if (X < 2) {
 		X = 5 * sqrt(X - 2 + 1);
