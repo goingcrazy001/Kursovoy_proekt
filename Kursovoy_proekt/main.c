@@ -3,7 +3,7 @@
 #include <math.h>
 
 main() {
-	F()
+	F();
 }
 double Q(double X) {
 	if (X < 2) {
