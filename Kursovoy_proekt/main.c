@@ -14,7 +14,7 @@ double Q(double X) {
 	}
 	return X;
 }
-int main()
+int F()
 {
 	setlocale(LC_ALL, "RUS");
 
