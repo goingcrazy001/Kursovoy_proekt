@@ -32,7 +32,7 @@ $X(i)→Q(i)→Control(Q(i))$.
 
 Для вычисления функции необходимо учитывать область её математической определённости. При значениях $X$ от $0$ до $1$ подкоренное выражение отрицательно, поэтому такие значения не могут использоваться для расчёта $Q$.
 
-Таким образом, фактический допустимый диапазон $X$ для вычисления функции составляет $1–21$.
+Таким образом, фактический допустимый диапазон $X$ для вычисления функции составляет $1–21$!
 ## Математическая модель
 Преобразование показания выполняется по индивидуальной кусочной функции:
 
@@ -104,45 +104,84 @@ $\boxed{Q(10)\approx66.44}$
 [Ссылка на блок-схему 2](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&dark=auto#R%3Cmxfile%3E%3Cdiagram%20name%3D%22%D0%A1%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0-1%22%20id%3D%22goGTumh30XNIcFfH6rBE%22%3E7VjbctowEP0az7QPYXzBQB5jLgkzaScBkjSPir3YamTLI0SAfn3XtmxjcFJCSclM4UFoj3bX8uroWCPN6obLS0Hi4Bv3gGmm7i01q6eZpmE2DfxLkFWGtG0F%2BIJ6yqkExvQXKFBX6Jx6MKs4Ss6ZpHEVdHkUgSsrGBGCL6puU86qT42JD1vA2CVsG32gngwytGO2S%2FwKqB%2FkTzZa59lISHJn9SazgHh8sQZZfc3qCs5l1guXXWBJ8fK6ZHGDV0aLiQmI5C4Bd1fD0Yq54a07uvc7d4PR%2FVyeWTVpFDSTq7wImAjrjYazCKiEcUzcZGSBS45YIEOGloFdfMcYhtEM10whU8pYlzMu0GZJnc48Ip6%2FaKY1SH%2Ba2S36XxN%2FHsl6fz39Zf5ZP%2FH3BfEolDERj5J5zqTgz%2FCeRMmDBySkLCHqhIZIOlP%2FDgtsRzwkkXJRDDWbaGd1eiFsruqkmS2GRXQ8%2BoJdP%2BlqPV07v0hap5%2B2vbS1NaxOp5UH4Kqtx9SkUdCT2EQ2Q9MpgZCwXFtNxYhL4CFIsUKXYI2054qhi5LgBWtVFktvZrbaxs08hqj95RepSwpiR7GwnpE3C9LhoheN3KbxNHiY9h%2FN4ZnaPuBt7ctthvK5cOGNXOY2kzHtWJlcyID7PCKsX6KO4PPIg2SGOlqlzzXnseL0T5BypYhA5pJX9wAsqfyRhDdsZT2ujfSWKnNqrJThwZTMmbwmT8Ac4j776Sxy%2BmYatT9DJRE%2ByDfq1KrniABGJH2prsPBF9zcRYFSYUlLIQhjwDju%2BxBfMAaBhZAgNsduyoF9RGsJ%2BbfovxOxW812NLu3l5K0a5REt6tKYhgVJTHsj1KS%2FEEHkRL7JCV%2FJREq9IZTrHxBhqbxh89KJl0qaoMPxTT2p4h90p5PpT01J5%2Fx5GIyHE%2BG3fHnOCztJnENu8Jrq21%2FlMjpBxS51jFE7shnH7uGhMc7DLVOgvSpBCk5DBmNBn6m%2Ft2JqIg5OLs6B9SK9ulAtJO%2BHFVO2q%2Bv7%2Bl251C3O9mNjp7e6LTzPraOuvU56kWN%2BX4tQbO8lcxO2uXdrtX%2FDQ%3D%3D%3C%2Fdiagram%3E%3C%2Fmxfile%3E)
 ## Реализация программы
 Программа написана на языке C++
-```c++
+```cpp
 #include <stdio.h>
 #include <locale.h>
 #include <math.h>
+#define a 2.0
+#define b 5.0
+#define c 1.0
+#define d 7.0
+#define e 4.0
+#define f 4.5
+#define g 50.0
+#define h 60.0
+#define low_limit 1.0
+#define high_limit 21.0
 
-main() {
-	F();
+void welcome();
+double calc_q(double X);
+void result();
+
+int main(void) {
+	setlocale(LC_ALL, "RUS");
+	welcome();
+	result();
+	return 0;
 }
-double Q(double X) {
-	if (X < 2) {
-		X = 5 * sqrt(X - 2 + 1);
+
+void welcome()
+{
+	printf("\n");
+	printf("====================================================\n");
+	printf("   Мониторинг реактора: концентрация кислорода (O2)\n");
+	printf("----------------------------------------------------\n");
+	printf("  Система преобразования показаний реактора\n");
+	printf("  Математическая модель: Q = f(X)\n");
+	printf("----------------------------------------------------\n");
+	printf("  Допустимый диапазон X: %.0f - %.0f %%\n", low_limit, high_limit);
+	printf("----------------------------------------------------\n");
+	printf("  Введите концентрацию кислорода X (%%): ");
+}
+double calc_q(double X) {
+	if (X < a) {
+		X = b * sqrt(X - a + c);
 	}
-	else if (X >= 2 && X <= 7) {
-		X = 2 * (X - 4.5) + 50;
+	else if (X >= a && X <= d) {
+		X = a * (X - f) + g;
 	}
-	else if (X > 7) {
-		X = 4 * log(X - 7 + 2) + 60;
+	else if (X > d) {
+		X = e * log(X - d + a) + h;
 	}
 	return X;
 }
-int F()
-{
-	setlocale(LC_ALL, "RUS");
 
+
+void result()
+{
 	double X;
-	printf("Введите X в диапазоне [0,21]:");
 	scanf("%lf", &X);
-	if (X>=0 && X<=21) {
-		printf("Вывод Q(X): %.2lf", Q(X));
+	if (X>=low_limit && X<=high_limit) {
+		printf("\n  Результат Q(X): %.2lf", calc_q(X));
 	}
 	else {
-		printf("Ошибка, введенное число лежит не в заданном диапазоне.");
+		printf("\n  Ошибка, введенное число лежит не в заданном диапазоне!");
 	}
 }
 ```
 ## Результат работы программы
 ```
-Введите X в диапазоне [0,21]:3,25
-Вывод Q(X): 47,50
+====================================================
+   Мониторинг реактора: концентрация кислорода (O2)
+----------------------------------------------------
+  Система преобразования показаний реактора
+  Математическая модель: Q = f(X)
+----------------------------------------------------
+  Допустимый диапазон X: 1 - 21 %
+----------------------------------------------------
+  Введите концентрацию кислорода X (%): 3,25
+
+  Результат Q(X): 47,50
 ```
 ## Информация о разработчике
 ```
