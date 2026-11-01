@@ -1,30 +1,63 @@
 ﻿#include <stdio.h>
 #include <locale.h>
 #include <math.h>
+#define a 2.0
+#define b 5.0
+#define c 1.0
+#define d 7.0
+#define e 4.0
+#define f 4.5
+#define g 50.0
+#define h 60.0
+#define low_limit 1.0
+#define high_limit 21.0
 
-double Q(double X) {
-	if (X < 2) {
-		X = 5 * sqrt(X - 2 + 1);
+void welcome();
+double calc_q(double X);
+void result();
+
+int main(void) {
+	setlocale(LC_ALL, "RUS");
+	welcome();
+	result();
+	return 0;
+}
+
+void welcome()
+{
+	printf("\n");
+	printf("====================================================\n");
+	printf("   Мониторинг реактора: концентрация кислорода (O2)\n");
+	printf("----------------------------------------------------\n");
+	printf("  Система преобразования показаний реактора\n");
+	printf("  Математическая модель: Q = f(X)\n");
+	printf("----------------------------------------------------\n");
+	printf("  Допустимый диапазон X: %.0f - %.0f %%\n", low_limit, high_limit);
+	printf("----------------------------------------------------\n");
+	printf("  Введите концентрацию кислорода X (%%): ");
+}
+double calc_q(double X) {
+	if (X < a) {
+		X = b * sqrt(X - a + c);
 	}
-	else if (X >= 2 && X <= 7) {
-		X = 2 * (X - 4.5) + 50;
+	else if (X >= a && X <= d) {
+		X = a * (X - f) + g;
 	}
-	else if (X > 7) {
-		X = 4 * log(X - 7 + 2) + 60;
+	else if (X > d) {
+		X = e * log(X - d + a) + h;
 	}
 	return X;
 }
-int main()
-{
-	setlocale(LC_ALL, "RUS");
 
+
+void result()
+{
 	double X;
-	printf("Введите X в диапазоне [0,21]:");
 	scanf("%lf", &X);
-	if (X>=0 && X<=21) {
-		printf("Вывод Q(X): %.2lf", Q(X));
+	if (X>=low_limit && X<=high_limit) {
+		printf("\n  Результат Q(X): %.2lf", calc_q(X));
 	}
 	else {
-		printf("Ошибка, введенное число лежит не в заданном диапазоне.");
+		printf("\n  Ошибка, введенное число лежит не в заданном диапазоне!");
 	}
 }
