@@ -43,9 +43,9 @@
 
 $$
 Q(X) = \begin{cases}
-5\cdot\sqrt{X-2+1}+5, & 1 < X < 2 \\
-2\cdot(X-4.5)+50, & 2 \leq X \leq 7 \\
-4\cdot\ln(X-7+2)+60, & X > 7
+5\cdot\sqrt{X-2+1}+5 &\text{при } 1 < X < 2 \\
+2\cdot(X-4.5)+50 &\text{при } 2 \leq X \leq 7 \\
+4\cdot\ln(X-7+2)+60 &\text{при } X > 7
 \end{cases}
 $$
 
