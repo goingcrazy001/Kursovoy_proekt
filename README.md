@@ -51,9 +51,9 @@ $$
 Поскольку $1 ≤ 1.5 < 2$, используется первая ветвь:
 
 $$
-\begin{flushleft}
+\begin{array}{llr}
 Q(1.5)=5\sqrt{1.5-1}+5
-\end{flushleft}
+\end{array}
 $$
 
 $$
